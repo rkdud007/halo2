@@ -1128,8 +1128,17 @@ impl<F: FromUniformBytes<64> + Ord> MockProver<F> {
                         if original_cell == permuted_cell {
                             None
                         } else {
+                            println!(
+                                "😇 permuted cell come from: column{}, row{}",
+                                cell.0, cell.1
+                            );
                             let columns = self.cs.permutation.get_columns();
                             let column = columns.get(column).unwrap();
+
+                            println!(
+                                "original_cell: {:?}, permuted_cell: {:?}, column: {:?}, row: {}",
+                                original_cell, permuted_cell, column, row
+                            );
                             Some(VerifyFailure::Permutation {
                                 column: (*column).into(),
                                 location: FailureLocation::find(
